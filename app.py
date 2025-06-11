@@ -36,7 +36,6 @@ col1.metric("Total de Rotas", df_filtrado["Rotas"].sum())
 col2.metric("Média de DS (%)", f'{df_filtrado["DS (%)"].str.replace(",", ".").str.rstrip("%").astype(float).mean():.1f}%')
 col3.metric("Carros sem Motorista", df_filtrado["Sem Motorista"].sum())
 
-df_filtrado["DS_float"]
 col4.metric("Carros em Manutenção", df_filtrado["Carros em manutenção"].sum())
 
 df_filtrado["DS_float"] = (
