@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import plotly.express as px
 
 st.set_page_config(page_title="Painel Logístico", layout="wide")
 st.title("📦 Painel Logístico - Mercado Livre")
@@ -34,7 +35,33 @@ col1, col2, col3, col4 = st.columns(4)
 col1.metric("Total de Rotas", df_filtrado["Rotas"].sum())
 col2.metric("Média de DS (%)", f'{df_filtrado["DS (%)"].str.replace(",", ".").str.rstrip("%").astype(float).mean():.1f}%')
 col3.metric("Carros sem Motorista", df_filtrado["Sem Motorista"].sum())
+
+df_filtrado["DS_float"]
 col4.metric("Carros em Manutenção", df_filtrado["Carros em manutenção"].sum())
+
+df_filtrado["DS_float"] = (
+    df_filtrado["DS (%)"]
+    .astype(str)
+    .str.replace(",", ".")
+    .str.replace("%", "")
+    .astype(float)
+)
+
+df_ds_base = df_filtrado.groupby("Base", as_index=False)["DS_float"].mean()
+
+st.subheader("📈 Desempenho médio por Base (% DS)")
+fig = px.bar(
+    df_ds_base,
+    x="Base",
+    y="Float",
+    text_auto=".1f",
+    labels={"DS_float": "DS (%)"},
+    title=("Média de DS (%) por Base"),
+    color="DS_float",
+    color_continuous_scale="Blues"
+)
+fig.update_layout(xaxis_title="Base", yaxis_title="DS (%)")
+st.plotly_chart(fig, use_container_width=True)
 
 # Exibir tabela com os dados
 st.subheader("📋 Tabela de Dados Filtrados")
