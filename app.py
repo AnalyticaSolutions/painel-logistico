@@ -53,7 +53,7 @@ st.subheader("📈 Desempenho médio por Base (% DS)")
 fig = px.bar(
     df_ds_base,
     x="Base",
-    y="Float",
+    y="DS_float",
     text_auto=".1f",
     labels={"DS_float": "DS (%)"},
     title=("Média de DS (%) por Base"),
