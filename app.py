@@ -5,15 +5,10 @@ import json
 from oauth2client.service_account import ServiceAccountCredentials
 
 # Escopo necessário para acessar o Google Sheets
-scope = [
-    "https://spreadsheets.google.com/feeds",
-    "https://www.googleapis.com/auth/drive"
-]
+scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 
 # Carrega o segredo do arquivo `secrets.toml`
-google_secrets = st.secrets["google_service_account"]
-creds_dict = dict(google_secrets)  # converte para dict normal
-creds_json = json.loads(json.dumps(creds_dict))  # garante que está no formato certo
+creds_json = st.secrets["google_service_account"]  # já é um dicionário válido
 
 # Autentica com o Google
 creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_json, scope)
