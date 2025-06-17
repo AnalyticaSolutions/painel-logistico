@@ -1,0 +1,16 @@
+# Proteção de arquivos sensíveis
+google_key.json
+.streamlit/secrets.toml
+
+# Cache do Python
+__pycache__/
+*.pyc
+
+# Ambiente virtual (se tiver)
+venv/
+.env
+
+# Arquivos de sistema/editor
+.DS_Store
+Thumbs.db
+.vscode/
