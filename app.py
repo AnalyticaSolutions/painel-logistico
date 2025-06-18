@@ -10,7 +10,7 @@ from evolucao_temporal import render_temporal
 # Configuração da página
 st.set_page_config(page_title="Painel Logístico", layout="wide")
 
-# Autenticação Google Sheets
+# Autenticação com Google Sheets
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 creds_json = st.secrets["google_service_account"]
 creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_json, scope)
@@ -20,8 +20,6 @@ client = gspread.authorize(creds)
 spreadsheet_name = "Planilha_KPIs_Coordenadores RJ MG ES SP JUNHO"
 worksheet_name = "Base_Tratada"
 sheet = client.open(spreadsheet_name).worksheet(worksheet_name)
-
-# Leitura dos dados
 data = sheet.get_all_records()
 df = pd.DataFrame(data)
 
