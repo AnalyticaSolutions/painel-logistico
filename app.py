@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import gspread
-import json
 from oauth2client.service_account import ServiceAccountCredentials
 
 from dashboard import render_dashboard
@@ -25,9 +24,11 @@ df = pd.DataFrame(data)
 
 # Navegação
 st.sidebar.title("🧭 Navegação")
+
 pagina = st.sidebar.radio("Escolha a página:", ["Dashboard Geral", "Evolução Temporal"])
 
+# Página principal
 if pagina == "Dashboard Geral":
     render_dashboard(df)
-elif pagina == "Evolução Temporal":
+else:
     render_temporal(df)
